@@ -4,12 +4,11 @@ import sys
 from sympy import *
 import math
 x = symbols('x')             
-f_expr = x**3 + 4*x**2 - 10
+f_expr = input('enter the function you want to solve\n')
 dfdx_expr = diff(f_expr, x)  
-f = lambdify([x],     
-             f_expr)  
+f = lambdify([x], f_expr)  
 dfdx = lambdify([x], dfdx_expr)
-print(dfdx(x))         
+print(f_expr)         
 
 method = int(input('which method do you want to use? \n 1. newoten-raphson \n 2. bisection \n 3. secant \n'))
 
@@ -66,8 +65,8 @@ elif method == 2:
             return x_list, iteration_counter
         else:
             return x_M, iteration_counter
-    a = 1
-    b = 2
+    a = float(input('enter a\n'))
+    b = float(input('enter b\n'))
     solution, no_iterations = bisection(f, a, b, acc=1.0e-6)
 
     print("Number of function calls: %d" % (1 + 2*no_iterations))
@@ -79,8 +78,8 @@ elif method == 3:
         iteration_counter = 0
         while abs(f_x1) > acc and iteration_counter < 100:
             try:
-                denominator = float(f_x1 - f_x0)/(x1 - x0)
-                x = x1 - float(f_x1)/denominator
+                denominator = float(f_x1 - f_x0)
+                x = x1 - float((f_x1)*(x1 - x0))/denominator
             except ZeroDivisionError:
                 print("Error! - denominator zero for x = ", x)
                 sys.exit(1)     
@@ -92,8 +91,8 @@ elif method == 3:
         if abs(f_x1) > acc:
             iteration_counter = -1
         return x, iteration_counter
-    x0 = 1000   
-    x1 = x0 - 1
+    x0 = float(input('enter x0\n'))
+    x1 = float(input('enter x1\n'))
     solution, no_iterations = secant(f, x0, x1, acc=1.0e-6)
     if no_iterations > 0:    
         print("Number of function calls: %d" % (2 + no_iterations))
