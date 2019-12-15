@@ -24,7 +24,7 @@ y_plot = np.zeros( (n,1))
 for i in range(1, n):
     x_plot.append(x[i][0])
 for i in range(n):
-    y_plot[i] = (variables[0]*x[i][0] + variables[1])
+    y_plot[i] = (variables[1]*x[i][0] + variables[0])
     
 plt.plot(x_plot, y, 'r.',x_plot , y_plot)
 plt.show()
