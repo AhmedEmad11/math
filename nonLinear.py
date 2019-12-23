@@ -26,7 +26,6 @@ if method == 1:
             f_value = f(x)
             iteration_counter += 1
 
-    
         if abs(f_value) > acc:
             iteration_counter = -1
         return x, iteration_counter
@@ -39,7 +38,7 @@ if method == 1:
     else:
         print("Solution not found!")
 elif method == 2:
-    def bisection(f, x_L, x_R, acc, return_x_list=False):
+    def bisection(f, x_L, x_R, acc):
         f_L = f(x_L)
         if f_L*f(x_R) > 0:
             print("root does not exist")
@@ -47,9 +46,7 @@ elif method == 2:
         x_M = float(x_L + x_R)/2.0
         f_M = f(x_M)
         iteration_counter = 1
-        if return_x_list:
-            x_list = []
-
+       
         while abs(f_M) > acc:
             if f_L*f_M > 0:   
                 x_L = x_M
@@ -59,14 +56,10 @@ elif method == 2:
             x_M = float(x_L + x_R)/2
             f_M = f(x_M)
             iteration_counter += 1
-            if return_x_list:
-                x_list.append(x_M)
-        if return_x_list:
-            return x_list, iteration_counter
-        else:
-            return x_M, iteration_counter
-    a = float(input('enter a\n'))
-    b = float(input('enter b\n'))
+       
+        return x_M, iteration_counter
+    a = float(input('enter the lower limit\n'))
+    b = float(input('enter the upper limit\n'))
     solution, no_iterations = bisection(f, a, b, acc=1.0e-6)
 
     print("Number of function calls: %d" % (1 + 2*no_iterations))
